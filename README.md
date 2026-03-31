@@ -30,7 +30,7 @@
 Run this command on a fresh **Ubuntu 24.04 LTS** VPS.
 
 ```bash
-apt update -y && apt install -y wget && wget -qO install https://raw.githubusercontent.com/TheTechSavant/WPOneClickInstaller/main/install && chmod +x install && ./install
+apt update -y && apt install -y wget && wget -qO install.sh https://raw.githubusercontent.com/TheTechSavant/WPOneClickInstaller/main/install.sh && chmod +x install.sh && ./install.sh
 ```
 
 ### 🛠️ Setup Steps
